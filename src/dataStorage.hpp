@@ -7,6 +7,10 @@
 using namespace std;
 
 void printSec();
+void createCSV();
+void read_record();
+void update_record();
+void delete_record();
 
 
 class Gene;
