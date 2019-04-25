@@ -1,6 +1,20 @@
 #include<datastorage.hpp>
-
+#include<vector>
 using namespace std;
+
+Gene::Gene()
+{
+}
+
+Gene::Gene(Gene &G)
+{
+  this->gid = G.gid;
+  this->name = G.name;
+  copy( (G.experience).beign() , (G.experience).end , back_inserter(this->experience) ); 
+  this->aptitude = G.aptitude;;
+  this->emotionalQuotient = G.emotionalQuotient;
+  this->socialQuotient = G.socialQuotient;
+}
 
 int Gene::getGid()
 {
