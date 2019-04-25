@@ -1,6 +1,5 @@
-  #include<datastorage.hpp>
+  #include<dataStorage.hpp>
   #include<vector>
-
   using namespace std;
 
   int Chromosome::getCid()
