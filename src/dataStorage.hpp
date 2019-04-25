@@ -6,13 +6,8 @@
 
 using namespace std;
 
-/*
-void printFromHeader();
 void printSec();
-void printFromHeader(){
-    std::cout<<"Hello from header file\n";
-}
-*/
+
 
 class Gene;
 class Chromosome;
@@ -20,6 +15,7 @@ class Population;
 
 class Gene
 {
+  private:
     int gid;
     string name;
     vector<int> experience; // For a fixed skill mapped to index values
@@ -28,7 +24,7 @@ class Gene
     int socialQuotient;
   public:
     Gene();
-    Gene(Gene &G);
+    //Gene(Gene &G);
     int getGid();
     string getName();
     int getAptitude();

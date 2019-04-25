@@ -2,12 +2,19 @@
 
 int main()
 {
+    //Let the TESTS Begin!
     int teamSize=-1;
-    std::cout<<"hello from main.cpp\n";
+    cout<<"hello from main.cpp\n";
+    printSec();
     Gene person1;
     Chromosome test;
     Population testP;
-    //printFromHeader();
-    //printSec();
+    person1.setGid(1);
+    person1.setName("Yugandhar");
+    person1.setAptitude(100);
+    person1.setEQ(75);
+    person1.setSQ(50);
+    cout<<person1.getName()<<"\n";
+    //Endgame for TESTS
     return 0;    
 }

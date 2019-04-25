@@ -4,17 +4,18 @@ using namespace std;
 
 Gene::Gene()
 {
+
 }
 
-Gene::Gene(Gene &G)
+/*Gene::Gene(Gene &G)
 {
-  this->gid = G.gid;
-  this->name = G.name;
-  copy( (G.experience).begin() , (G.experience).end() , back_inserter(this->experience) ); 
-  this->aptitude = G.aptitude;;
-  this->emotionalQuotient = G.emotionalQuotient;
-  this->socialQuotient = G.socialQuotient;
-}
+  gid = G.gid;
+  name = G.name;
+  copy((G.experience).begin(), (G.experience).end(), back_inserter(experience)); 
+  aptitude = G.aptitude;;
+  emotionalQuotient = G.emotionalQuotient;
+  socialQuotient = G.socialQuotient;
+}*/
 
 int Gene::getGid()
 {
