@@ -25,18 +25,20 @@ class Gene
     vector<int> experience; // For a fixed skill mapped to index values
     int aptitude;
     int emotionalQuotient;
-    int willingnessFactor; // Rating from 1-10
+    int socialQuotient;
   public:
+    Gene();
+    Gene(Gene &G);
     int getGid();
     string getName();
     int getAptitude();
     int getEQ();
-    int getWF();
+    int getSQ();
     void setGid(int gid);
     void setName(string name);
     void setAptitude(int aptitude);
     void setEQ(int EQ);
-    void setWF(int WF);
+    void setSQ(int WF);
 };
 
 class Chromosome
@@ -55,7 +57,7 @@ class Chromosome
     void setGenes(vector<Gene> genes);
     void setFitnessVal(int fitnessVal);
     void setGeneAtIndex(int i,Gene X);
-    Gene getGeneWithID(int id);
+    Gene* getGeneWithID(int id);
     Gene getGeneAtIndex(int index);
     void fitnessFunction();
 };
