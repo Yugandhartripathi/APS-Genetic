@@ -21,5 +21,11 @@ int main()
     //update_record();
     //read_record();
     //Endgame for TESTS
+
+    //Main Workflow
+    int teamSize,populationSize,gen;
+    cin>>teamSize>>populationSize>>gen;
+    Population p(1,populationSize,teamSize);
+    train(p,gen);
     return 0;    
 }

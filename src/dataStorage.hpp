@@ -11,7 +11,7 @@ void createCSV();
 void read_record();
 void update_record();
 void delete_record();
-
+void train(Population p,int gen);
 
 class Gene;
 class Chromosome;
@@ -74,7 +74,7 @@ class Population
     vector<Chromosome> chromosomes;
   public:
     Population();
-    Population(int id,int ps);
+    Population(int id,int ps,int ts);
     int getID();
     void setID(int pid);
     int getPopulationSize();
@@ -85,6 +85,6 @@ class Population
     Chromosome fittestMember();
     void addNewChromosome(Chromosome X);
     void removeChromosomeWithCID(int cid);
-    void crossOver();
+    Population crossOver();
     void mutation();
 };
