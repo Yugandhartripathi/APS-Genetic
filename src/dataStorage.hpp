@@ -49,6 +49,8 @@ class Chromosome
     vector<Gene> genes;
     int fitnessVal;
   public:
+    Chromosome();
+    Chromosome(int id,int ts);
     int getCid();
     int getTeamSize();
     int getFitnessVal();
@@ -65,9 +67,21 @@ class Chromosome
 class Population
 {
   private:
-    int id;
+    int pid;
+    int populationSize;
+    int sizeOfEachTeam;
+    int numOfEmployees;
     vector<Chromosome> chromosomes;
   public:
+    Population();
+    Population(int id,int ps);
+    int getID();
+    void setID(int pid);
+    int getPopulationSize();
+    void setPopulationSize(int ps);
+    int getTeamSize();
+    void setTeamSize(int ts);
+    void populate();
     Chromosome fittestMember();
     void addNewChromosome(Chromosome X);
     void removeChromosomeWithCID(int cid);

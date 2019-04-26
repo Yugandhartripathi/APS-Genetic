@@ -30,6 +30,28 @@ void createCSV()
     }
 }
 
+//Halted because data needs some preprocessing like one hot encoding of interest/OS/TE columns
+//which will make the process much easier
+
+/*void readRecordAtIndexAndReturnGene(int index)
+{
+    fstream fin;
+    fin.open("GAdataFromgForm.csv", ios::in);
+    vector<string> row;
+    string line,word,temp;
+    while(fin>>temp)
+    {
+        row.clear();
+        line=temp;
+        stringstream s(line);
+        while(getline(s,word,','))
+        {
+            row.push_back(word);
+        }
+
+    }
+}*/
+
 void read_record()
 {
     fstream fin;

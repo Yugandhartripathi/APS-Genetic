@@ -2,7 +2,44 @@
 #include <vector>
 using namespace std;
 
+Population::Population()
+{
+}
 
+Population::Population(int id,int ps)
+{
+  pid=id;
+  populationSize=ps;
+}
+
+int Population::getID(){
+  return pid;
+}
+
+void Population::setID(int id)
+{
+  pid=id;
+}
+
+int Population::getPopulationSize()
+{
+  return populationSize;
+}
+
+void Population::setPopulationSize(int ps)
+{
+  populationSize=ps;
+}
+
+int Population::getTeamSize()
+{
+  return sizeOfEachTeam;
+}
+
+void Population::setTeamSize(int ts)
+{
+  sizeOfEachTeam = ts;
+}
 
 Chromosome Population::fittestMember()
 {
@@ -42,4 +79,18 @@ void Population::removeChromosomeWithCID(int cid)
   }
   if (pos != chromosomes.end())
     chromosomes.erase(pos);
+}
+
+void Population::populate()
+{
+  for(int i=0;i<populationSize;i++)
+  {
+    Chromosome newOrder(i,sizeOfEachTeam);
+    for(int j=0;j<sizeOfEachTeam;j++)
+    {
+      Gene randomGene;
+      newOrder.setGeneAtIndex(j,randomGene);
+    }
+    chromosomes.push_back(newOrder);
+  }
 }

@@ -2,6 +2,18 @@
   #include<vector>
   using namespace std;
 
+  Chromosome::Chromosome()
+  {
+  }
+
+  Chromosome::Chromosome(int id,int ts)
+  {
+    cid=id;
+    teamSize=ts;
+    genes.reserve(teamSize);
+    fitnessVal=-1;
+  }
+
   int Chromosome::getCid()
   {
     return cid;
