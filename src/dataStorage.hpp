@@ -23,6 +23,7 @@ class Gene
     int gid;
     string name;
     vector<int> experience; // For a fixed skill mapped to index values
+    vector<bool> areaOfInterests; //For a fixed domain mapped to index value
     int aptitude;
     int emotionalQuotient;
     int socialQuotient;
@@ -34,6 +35,8 @@ class Gene
     int getAptitude();
     int getEQ();
     int getSQ();
+    int getExperienceBySkill(int skillNo);
+    bool checkAreaOfInterest(int interestNo);
     void setGid(int gid);
     void setName(string name);
     void setAptitude(int aptitude);
