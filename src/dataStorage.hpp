@@ -36,7 +36,7 @@ class Gene
     int getEQ();
     int getSQ();
     int getExperienceBySkill(int skillNo);
-    bool checkAreaOfInterest(int interestNo);
+    bool checkAreaOfInterest(int domainNo);
     void setGid(int gid);
     void setName(string name);
     void setAptitude(int aptitude);
@@ -64,7 +64,7 @@ class Chromosome
     void setGeneAtIndex(int i,Gene X);
     Gene* getGeneWithID(int id);
     Gene getGeneAtIndex(int index);
-    void fitnessFunction();
+    void fitnessFunction(bool requiredSkills[7],bool domain[6]);
 };
 
 class Population
