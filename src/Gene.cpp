@@ -42,6 +42,16 @@ int Gene::getSQ()
   return socialQuotient;
 }
 
+int getExperienceBySkill(int skillNo)
+{
+  return experience[skillNo];
+}
+
+bool checkAreaOfInterest(int domainNo)
+{
+  return areaOfInterest[domainNo];
+}
+
 void Gene::setGid(int gid)
 {
   this->gid=gid;
