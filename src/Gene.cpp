@@ -42,12 +42,12 @@ int Gene::getSQ()
   return socialQuotient;
 }
 
-int getExperienceBySkill(int skillNo)
+int Gene::getExperienceBySkill(int skillNo)
 {
   return experience[skillNo];
 }
 
-bool checkAreaOfInterest(int domainNo)
+bool Gene::checkAreaOfInterest(int domainNo)
 {
   return areasOfInterest[domainNo];
 }
@@ -77,12 +77,12 @@ void Gene::setSQ(int SQ)
   this->socialQuotient=SQ;
 }
 
-void setExperienceBySkill(int skillNo,int val)
+void Gene::setExperienceBySkill(int skillNo,int val)
 {
   experience[skillNo] = val;
 }
 
-void setAreaOfInterest(int domainNo,bool val)
+void Gene::setAreaOfInterest(int domainNo,bool val)
 {
   areasOfInterest[domainNo] = val;
 }
