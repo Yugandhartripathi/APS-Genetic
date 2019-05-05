@@ -70,6 +70,40 @@
     return genes[index];
   }    
 
-  void fitnessFunction(){
+  void fitnessFunction(bool requiredSkill[7], bool domain[6]){
+ 
+    int avgSQ=0,avgEQ=0,avgAptitude=0,avgMatchingSkill=0,avgNonMatchingSkill=0,relevantInterests=0,conflictingInterest=0;
+    int match=0,nonMatch=0;
+    vector<Gene>::iterator i;
+    for(i=genes.begin();i!=genes.end(); ++i)
+    {
+      avgSQ+= (*i).getSQ();
+      avgEQ+= (*i).getEQ();
+      avgAptitude+= (*i).getAptitude();
+      for(int j=0;j<7;j++)
+      {
+        if(requiredSkill[j]==true)
+        {
+          avgMatchingSkill += (*i).getExperienceBySkill(j);
+          match++;
+        }
+        else
+        {
+          avgNonMatchingSkill += (*i).getExperienceBySkill(j);
+          nonMatch++;
+        }
+      }
+      for(int j=0;j<6;j++)
+      {
+        if(domain[j]==true)
+        {
+          if( (*i).checkAreaOfInterest(j) == true )
+            relevantInterests++;
+          else
+            conflictingInterests++; 
+        }
+      }
+    }
+    fitnessval = avgSQ/teamsize + avgEQ/teamsize + avgAptitude/teamSize + avgMatchingSkill/match + 0.5*avgNonMatchingSkill/nonMatch + relevantInterests - 0.5*conflictingInterests;
 
-  };
+  }
