@@ -49,7 +49,7 @@ int getExperienceBySkill(int skillNo)
 
 bool checkAreaOfInterest(int domainNo)
 {
-  return areaOfInterest[domainNo];
+  return areasOfInterest[domainNo];
 }
 
 void Gene::setGid(int gid)
@@ -75,4 +75,14 @@ void Gene::setEQ(int EQ)
 void Gene::setSQ(int SQ)
 {
   this->socialQuotient=SQ;
+}
+
+void setExperienceBySkill(int skillNo,int val)
+{
+  experience[skillNo] = val;
+}
+
+void setAreaOfInterest(int domainNo,bool val)
+{
+  areasOfInterest[domainNo] = val;
 }
