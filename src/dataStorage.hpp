@@ -6,16 +6,16 @@
 
 using namespace std;
 
+class Gene;
+class Chromosome;
+class Population;
+
 void printSec();
 void createCSV();
 void read_record();
 void update_record();
 void delete_record();
 void train(Population p,int gen);
-
-class Gene;
-class Chromosome;
-class Population;
 
 class Gene
 {
