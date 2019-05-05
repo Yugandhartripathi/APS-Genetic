@@ -70,7 +70,7 @@
     return genes[index];
   }    
 
-  void fitnessFunction(bool requiredSkill[7], bool domain[6]){
+  void Chromosome::fitnessFunction(bool requiredSkill[7], bool domain[6]){
  
     int avgSQ=0,avgEQ=0,avgAptitude=0,avgMatchingSkill=0,avgNonMatchingSkill=0,relevantInterests=0,conflictingInterests=0;
     int match=0,nonMatch=0;
