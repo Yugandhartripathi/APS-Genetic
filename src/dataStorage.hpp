@@ -6,6 +6,10 @@
 
 using namespace std;
 
+class Gene;
+class Chromosome;
+class Population;
+
 void printSec();
 void createCSV();
 void read_record();
@@ -13,16 +17,13 @@ void update_record();
 void delete_record();
 void train(Population p,int gen);
 
-class Gene;
-class Chromosome;
-class Population;
-
 class Gene
 {
   private:
     int gid;
     string name;
     vector<int> experience; // For a fixed skill mapped to index values
+    vector<bool> areasOfInterest; //For a fixed domain mapped to index value
     int aptitude;
     int emotionalQuotient;
     int socialQuotient;
@@ -34,11 +35,15 @@ class Gene
     int getAptitude();
     int getEQ();
     int getSQ();
+    int getExperienceBySkill(int skillNo);
+    bool checkAreaOfInterest(int domainNo);
     void setGid(int gid);
     void setName(string name);
     void setAptitude(int aptitude);
     void setEQ(int EQ);
-    void setSQ(int WF);
+    void setSQ(int SQ);
+    void setExperienceBySkill(int skillNo,int val);
+    void setAreaOfInterest(int domainNo,bool val);
 };
 
 class Chromosome
@@ -61,7 +66,7 @@ class Chromosome
     void setGeneAtIndex(int i,Gene X);
     Gene* getGeneWithID(int id);
     Gene getGeneAtIndex(int index);
-    void fitnessFunction();
+    void fitnessFunction(bool requiredSkills[7],bool domain[6]);
 };
 
 class Population
