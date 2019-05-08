@@ -10,9 +10,9 @@ void createCSV()
     fstream fout;
     int n;
     fout.open("testing.csv", ios::out | ios::app);
-    cout<<"Enter number of entries: ";
-    cin>>n;
-    cout << "Enter the details of"<<n<<"people:\n roll name C++ Java Python Javascript\n";
+    cout << "Enter number of entries: ";
+    cin >> n;
+    cout << "Enter the details of" << n << "people:\n roll name C++ Java Python Javascript\n";
     int i, roll, C, Java, Python, Javascript;
     string name;
 

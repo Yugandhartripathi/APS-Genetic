@@ -1,5 +1,6 @@
-#include<iostream>
+#include <iostream>
 
-void printSec(){
-    std::cout<<"Hello from secondary via header\n";
+void printSec()
+{
+    std::cout << "Hello from secondary via header\n";
 }

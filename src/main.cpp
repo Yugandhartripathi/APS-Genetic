@@ -3,8 +3,8 @@
 int main()
 {
     //Let the TESTS Begin!
-    int teamSize=-1;
-    cout<<"hello from main.cpp\n";
+    int teamSize = -1;
+    cout << "hello from main.cpp\n";
     printSec();
     Gene person1;
     Chromosome test;
@@ -14,7 +14,7 @@ int main()
     person1.setAptitude(100);
     person1.setEQ(75);
     person1.setSQ(50);
-    cout<<person1.getName()<<"\n";
+    cout << person1.getName() << "\n";
     //createCSV();reportcard
     //update_record();
     read_record();
@@ -23,9 +23,9 @@ int main()
     //Endgame for TESTS
 
     //Main Workflow
-    int teamSize,populationSize,gen;
-    cin>>teamSize>>populationSize>>gen;
-    Population p(1,populationSize,teamSize);
-    train(p,gen);
-    return 0;    
+    int teamSize, populationSize, gen;
+    cin >> teamSize >> populationSize >> gen;
+    Population p(1, populationSize, teamSize);
+    train(p, gen);
+    return 0;
 }

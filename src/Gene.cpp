@@ -1,10 +1,9 @@
 #include "dataStorage.hpp"
-#include<vector>
+#include <vector>
 using namespace std;
 
 Gene::Gene()
 {
-
 }
 
 /*Gene::Gene(Gene &G)
@@ -23,7 +22,7 @@ int Gene::getGid()
 }
 
 string Gene::getName()
-{ 
+{
   return name;
 }
 
@@ -54,35 +53,35 @@ bool Gene::checkAreaOfInterest(int domainNo)
 
 void Gene::setGid(int gid)
 {
-  this->gid=gid;
+  this->gid = gid;
 }
 
 void Gene::setName(string name)
 {
-  this->name=name;
+  this->name = name;
 }
 
 void Gene::setAptitude(int aptitude)
 {
-  this->aptitude=aptitude;
+  this->aptitude = aptitude;
 }
 
 void Gene::setEQ(int EQ)
 {
-  this->emotionalQuotient=EQ;
+  this->emotionalQuotient = EQ;
 }
 
 void Gene::setSQ(int SQ)
 {
-  this->socialQuotient=SQ;
+  this->socialQuotient = SQ;
 }
 
-void Gene::setExperienceBySkill(int skillNo,int val)
+void Gene::setExperienceBySkill(int skillNo, int val)
 {
   experience[skillNo] = val;
 }
 
-void Gene::setAreaOfInterest(int domainNo,bool val)
+void Gene::setAreaOfInterest(int domainNo, bool val)
 {
   areasOfInterest[domainNo] = val;
 }

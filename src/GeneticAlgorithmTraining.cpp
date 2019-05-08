@@ -1,10 +1,10 @@
 #include "dataStorage.hpp"
-#include<iostream>
+#include <iostream>
 
-void train(Population p,int generations)
+void train(Population p, int generations)
 {
     p.populate();
-    for(int i=0;i<generations;i++)
+    for (int i = 0; i < generations; i++)
     {
         Population newP;
         Chromosome topFitness = p.fittestMember();
@@ -15,11 +15,11 @@ void train(Population p,int generations)
         //sort old and new population wrt fitness values descending
         //take top 20% of old population
         //take top 80% of new population
-        if(topFitness.getFitnessVal<newP.fittestMember().getFitnessVal())
+        if (topFitness.getFitnessVal < newP.fittestMember().getFitnessVal())
         {
             topFitness = newP.fittestMember();
         }
-        p=newP;
+        p = newP;
         // Here we go again
     }
 }
