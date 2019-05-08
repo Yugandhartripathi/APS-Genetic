@@ -2,8 +2,8 @@ CC := g++
 
 all: executable
 
-executable: main.o helperFunctions.o Gene.o Chromosome.o Population.o readWriteCSV.o
-	$(CC) main.o helperFunctions.o Gene.o Chromosome.o Population.o readWriteCSV.o -o bin/executable
+executable: main.o helperFunctions.o Gene.o Chromosome.o Population.o readWriteCSV.o GA.o
+	$(CC) main.o helperFunctions.o Gene.o Chromosome.o Population.o readWriteCSV.o GA.o -o bin/executable
 	
 main.o: src/main.cpp
 	$(CC) -c src/main.cpp
@@ -22,6 +22,9 @@ Population.o: src/Population.cpp
 
 readWriteCSV.o: src/readWriteCSV.cpp
 	$(CC) -c src/readWriteCSV.cpp
+
+GA.o: src/GeneticAlgorithmTraining.cpp
+	$(CC) -c src/GeneticAlgorithmTraining.cpp
 
 clean:
 	rm -rf *o bin/executable

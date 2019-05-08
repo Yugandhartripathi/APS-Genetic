@@ -10,9 +10,9 @@ void createCSV()
     fstream fout;
     int n;
     fout.open("testing.csv", ios::out | ios::app);
-    cout<<"Enter number of entries: ";
-    cin>>n;
-    cout << "Enter the details of"<<n<<"people:\n roll name C++ Java Python Javascript\n";
+    cout << "Enter number of entries: ";
+    cin >> n;
+    cout << "Enter the details of" << n << "people:\n roll name C++ Java Python Javascript\n";
     int i, roll, C, Java, Python, Javascript;
     string name;
 
@@ -29,6 +29,28 @@ void createCSV()
              << "\n";
     }
 }
+
+//Halted because data needs some preprocessing like one hot encoding of interest/OS/TE columns
+//which will make the process much easier
+
+/*void readRecordAtIndexAndReturnGene(int index)
+{
+    fstream fin;
+    fin.open("GAdataFromgForm.csv", ios::in);
+    vector<string> row;
+    string line,word,temp;
+    while(fin>>temp)
+    {
+        row.clear();
+        line=temp;
+        stringstream s(line);
+        while(getline(s,word,','))
+        {
+            row.push_back(word);
+        }
+
+    }
+}*/
 
 void read_record()
 {
