@@ -24,7 +24,7 @@ readWriteCSV.o: src/readWriteCSV.cpp
 	$(CC) -c src/readWriteCSV.cpp
 
 GA.o: src/GeneticAlgorithmTraining.cpp
-	$(CC) -c src/GeneticAlgorithmTraining.cpp
+	$(CC) -c src/GeneticAlgorithmTraining.cpp -o GA.o
 
 clean:
 	rm -rf *o bin/executable
