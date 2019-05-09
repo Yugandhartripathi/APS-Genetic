@@ -15,6 +15,7 @@ void createCSV();
 void read_record();
 void update_record();
 void delete_record();
+Gene readRecordAtIndexAndReturnGene(int index);
 void train(Population p, int gen);
 
 class Gene
@@ -95,4 +96,5 @@ public:
   void removeChromosomeWithCID(int cid);
   Population crossOver();
   void mutation();
+  Chromosome getChromosomeAtIndex(int ind);
 };

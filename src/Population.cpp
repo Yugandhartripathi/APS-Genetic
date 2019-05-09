@@ -1,6 +1,8 @@
 #include "dataStorage.hpp"
 #include <vector>
 #include <stdlib.h>
+#include <cstdlib>
+
 using namespace std;
 
 Population::Population()
@@ -92,7 +94,8 @@ void Population::populate()
     for (int j = 0; j < sizeOfEachTeam; j++)
     {
       Gene randomGene;
-
+      int r=(rand()%60)+1;
+      randomGene=readRecordAtIndexAndReturnGene(r);
       newOrder.setGeneAtIndex(j, randomGene);
     }
     chromosomes.push_back(newOrder);
@@ -111,7 +114,7 @@ void Population::mutation()
         int r1 = rand() % populationSize;
         int r2 = rand() % sizeOfEachTeam;
         int r3 = rand() % sizeOfEachTeam;
-        chromosomes[i].setGeneAtIndex(r2, chromosomes[r1].getGeneAtIndex[r3]);
+        chromosomes[i].setGeneAtIndex(r2, chromosomes[r1].getGeneAtIndex(r3));
       }
     }
   }
@@ -162,4 +165,9 @@ Population Population::crossOver()
     newPopulation.addNewChromosome(X);
   }
   return newPopulation;
+}
+
+Chromosome Population::getChromosomeAtIndex(int ind)
+{
+  return chromosomes[ind];
 }
