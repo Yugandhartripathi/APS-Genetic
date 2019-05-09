@@ -80,12 +80,16 @@ void Chromosome::fitnessFunction(bool requiredSkill[7], bool domain[6])
   {
     avgSQ += (*i).getSQ();
     avgEQ += (*i).getEQ();
+    //cout<<avgSQ<<" "<<avgEQ<<endl;
     avgAptitude += (*i).getAptitude();
     for (int j = 0; j < 7; j++)
     {
+      cout<<"Ran "<<j<<"times\n";
       if (requiredSkill[j] == true)
       {
+        cout<<"Truth\n";
         avgMatchingSkill += (*i).getExperienceBySkill(j);
+        cout<<"Got here\n";
         match++;
       }
       else
@@ -94,6 +98,7 @@ void Chromosome::fitnessFunction(bool requiredSkill[7], bool domain[6])
         nonMatch++;
       }
     }
+    cout<<"After first inner loop\n";
     for (int j = 0; j < 6; j++)
     {
       if (domain[j] == true)
@@ -104,6 +109,7 @@ void Chromosome::fitnessFunction(bool requiredSkill[7], bool domain[6])
           conflictingInterests++;
       }
     }
+    cout<<"end\n";
   }
   fitnessVal = avgSQ / teamSize + avgEQ / teamSize + avgAptitude / teamSize + avgMatchingSkill / match + 0.5 * avgNonMatchingSkill / nonMatch + relevantInterests - 0.5 * conflictingInterests;
 }

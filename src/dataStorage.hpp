@@ -3,6 +3,10 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
+#include <sstream>
+
+#define f0(i,n,s) for(int i=0;i<n;i+=s)
 
 using namespace std;
 
@@ -15,7 +19,7 @@ void createCSV();
 void read_record();
 void update_record();
 void delete_record();
-Gene readRecordAtIndexAndReturnGene(int index);
+Gene* readRecordAtIndexAndReturnGene(int index);
 void train(Population p, int gen);
 
 class Gene
@@ -23,15 +27,16 @@ class Gene
 private:
   int gid;
   string name;
-  vector<int> experience;       // For a fixed skill mapped to index values
-  vector<bool> areasOfInterest; //For a fixed domain mapped to index value
+  int experience[7];       // For a fixed skill mapped to index values
+  bool areasOfInterest[6]; //For a fixed domain mapped to index value
   int aptitude;
   int emotionalQuotient;
   int socialQuotient;
 
 public:
   Gene();
-  //Gene(Gene &G);
+  Gene(const Gene &G);
+  Gene& operator=(const Gene &G);
   int getGid();
   string getName();
   int getAptitude();
@@ -46,6 +51,8 @@ public:
   void setSQ(int SQ);
   void setExperienceBySkill(int skillNo, int val);
   void setAreaOfInterest(int domainNo, bool val);
+  void printInterest();
+  void printExp();
 };
 
 class Chromosome
@@ -64,10 +71,10 @@ public:
   int getFitnessVal();
   void setCid(int cid);
   void setTeamSize(int teamSize);
-  void setGenes(vector<Gene> genes);
+  void setGenes(vector<Gene> genes); ///not working
   void setFitnessVal(int fitnessVal);
   void setGeneAtIndex(int i, Gene X);
-  Gene *getGeneWithID(int id);
+  Gene *getGeneWithID(int id); //not working
   Gene getGeneAtIndex(int index);
   void fitnessFunction(bool requiredSkills[7], bool domain[6]);
 };

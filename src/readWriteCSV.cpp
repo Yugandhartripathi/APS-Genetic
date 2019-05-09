@@ -1,7 +1,6 @@
 #include "dataStorage.hpp"
-#include <fstream>
-#include <sstream>
 
+/*
 void createCSV()
 {
     fstream fout;
@@ -26,42 +25,44 @@ void createCSV()
              << "\n";
     }
 }
-
+*/
 //Halted because data needs some preprocessing like one hot encoding of interest/OS/TE columns
 //which will make the process much easier
 
-Gene readRecordAtIndexAndReturnGene(int index)
+Gene* readRecordAtIndexAndReturnGene(int index)
 {
     fstream fin;
+    Gene G;
     fin.open("processedData.csv", ios::in);
+    //cout<<"success Read\n";
     vector<string> row;
     string line,word,temp;
     int count=0;
     while(fin>>temp)
     {
+        //cout<<"got in loop\n";
         row.clear();
         line=temp;
         stringstream s(line);
         while(getline(s,word,','))
         {
+            //cout<<word<<"\n";
             row.push_back(word);
         }
+        //cout<<"before stoi\n";
         int eidR = stoi(row[0]);
-        for(int i=0;i<21;i++)
-        {
-            cout<<row[i]<<" ";
-        }
-        cout<<endl;
+        //cout<<"After stoi\n";
+        //cout<<endl;
         if (eidR == index)
         {
-
+            cout<<"Got in IF\n";
             count = 1;
-            Gene G;
             G.setGid(stoi(row[0]));
             G.setName(row[1]);
             G.setSQ(stoi(row[5]));
             G.setEQ(stoi(row[9]));
             G.setAptitude(stoi(row[13]));
+            //cout<<"First five down\n";
             G.setExperienceBySkill(0,stoi(row[14])); //C++
             G.setExperienceBySkill(1,stoi(row[15])); //PHP
             G.setExperienceBySkill(2,stoi(row[16])); //JS
@@ -69,6 +70,7 @@ Gene readRecordAtIndexAndReturnGene(int index)
             G.setExperienceBySkill(4,stoi(row[18])); //Java
             G.setExperienceBySkill(5,stoi(row[19])); //Python
             G.setExperienceBySkill(6,stoi(row[20])); //HTML/CSS
+            cout<<"Now another loop below\n";
             for(int indz=21;indz<27;indz++)
             {
                 bool temp=false;
@@ -78,11 +80,19 @@ Gene readRecordAtIndexAndReturnGene(int index)
                 }
                 G.setAreaOfInterest(indz-21,temp);
             }
+            cout<<"breaking point\n";
             break;
         }
-    }
-    if (count == 0)
+    }    
+    if (count == 0){
         cout << "Record not found\n";
+        return NULL;
+    }
+    else
+    {
+        cout<<"return\n";
+        return &G;
+    }
 }
 
 void read_record()
@@ -128,7 +138,7 @@ void read_record()
     if (count == 0)
         cout << "Record not found\n";
 }
-
+/*
 void update_record()
 {
 
@@ -296,3 +306,4 @@ void delete_record()
     // renaming the new file with the existing file name
     rename("testingNew.csv", "testing.csv");
 }
+*/
