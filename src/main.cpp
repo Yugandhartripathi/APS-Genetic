@@ -2,20 +2,15 @@
 
 int main()
 {
-    //Let the TESTS Begin!
+    /*Let the TESTS Begin!
     int teamSize = -1;
     Gene person1,person2,person3,person4;
     Chromosome test(1,4);
     Population testP(1,100,4);
-    //Main Workflow
-    //int teamSize, populationSize, gen;
-    //cin >> teamSize >> populationSize >> gen;
-    //Population p(1, populationSize, teamSize);
-    //train(p, gen);
-    person1=readRecordAtIndexAndReturnGene(1);
-    person2=readRecordAtIndexAndReturnGene(2);
-    person3=readRecordAtIndexAndReturnGene(3);
-    person4=readRecordAtIndexAndReturnGene(4);
+    person1=readRecordAtIndexAndReturnGene(5);
+    person2=readRecordAtIndexAndReturnGene(25);
+    person3=readRecordAtIndexAndReturnGene(18);
+    person4=readRecordAtIndexAndReturnGene(60);
     vector<Gene> genee(4);
     genee[0]=person1;
     genee[1]=person2;
@@ -25,9 +20,18 @@ int main()
     //cout<<genee[1].getName()<<" "<<genee[1].getExperienceBySkill(2)<<endl;
     test.setGenes(genee);
     cout<<test.getGeneAtIndex(3).getExperienceBySkill(1)<<endl;
-    bool rS[]={true,false,true,false,false,false,false};
     cout<<test.getFitnessVal()<<endl;
     test.fitnessFunction(rS);
-    cout<<test.getFitnessVal();
+    cout<<test.getFitnessVal()<<endl;
+    cout<<testP.getID()<<endl;
+    testP.addNewChromosome(test);
+    cout<<testP.getChromosomeAtIndex(0).getFitnessVal();
+    End Game for tests*/
+    //Main Workflow
+    int teamSize, populationSize, gen;
+    bool rS[]={true,true,true,true,true,false,false};
+    cin >> teamSize >> populationSize >> gen;
+    Population p(1, populationSize, teamSize);
+    train(p, gen, rS);
     return 0;
 }

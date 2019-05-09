@@ -48,8 +48,9 @@ void Chromosome::setFitnessVal(int fitnessVal1)
 }
 
 void Chromosome::setGeneAtIndex(int i, Gene X)
-{
+{ 
   genes[i] = X;
+  cout<<i<<" \n";
 }
 
 Gene Chromosome::getGeneAtIndex(int index)
@@ -59,29 +60,29 @@ Gene Chromosome::getGeneAtIndex(int index)
 
 void Chromosome::fitnessFunction(bool requiredSkill[7])
 {
-
   int avgSQ = 0, avgEQ = 0, avgAptitude = 0, avgMatchingSkill = 0, avgNonMatchingSkill = 0;
   int match = 0, nonMatch = 0;
-  vector<Gene>::iterator i;
-  for (i = genes.begin(); i != genes.end(); ++i)
-  {
-    avgSQ += (*i).getSQ();
-    avgEQ += (*i).getEQ();
-    avgAptitude += (*i).getAptitude();
-    for (int j = 0; j < 7; j++)
+  //cout<<genes[0].getSQ()<<endl;
+  for(int i=0;i<teamSize;i++) 
+  { 
+    avgSQ += genes[i].getSQ();
+    avgEQ += genes[i].getEQ();
+    avgAptitude += genes[i].getAptitude();
+    for (int j = 1; j <= 7; j++)
     {
-      if (requiredSkill[j] == true)
+      if (requiredSkill[j-1] == true)
       {
-        avgMatchingSkill += (*i).getExperienceBySkill(j);
+        avgMatchingSkill += genes[i].getExperienceBySkill(j);
         match++;
       }
       else
       {
-        avgNonMatchingSkill += (*i).getExperienceBySkill(j);
+        avgNonMatchingSkill += genes[i].getExperienceBySkill(j);
         nonMatch++;
       }
     }
   }
-  cout<<avgSQ<<" "<<avgEQ<<endl;
-  fitnessVal = avgSQ / teamSize + avgEQ / teamSize + avgAptitude / teamSize + avgMatchingSkill / match + 0.5 * avgNonMatchingSkill / nonMatch ;
+  cout<<2*avgSQ/teamSize<<" "<<avgEQ/teamSize<<" "<<avgAptitude/teamSize<<" "<<(avgMatchingSkill*15)<<" "<<(avgNonMatchingSkill*3)<<endl;
+  fitnessVal = 2*(avgSQ / teamSize) + (avgEQ / teamSize) + (avgAptitude / teamSize)+avgMatchingSkill*15+avgNonMatchingSkill*3;
+  cout<<fitnessVal<<endl;
 }

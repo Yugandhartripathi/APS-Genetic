@@ -4,21 +4,26 @@
 void train(Population p, int generations,bool reqSkill[7])
 {
     p.populate();
+    cout<<"populated\n";
     for (int i = 0; i < generations; i++)
     {
+        cout<<"in gen loop\n";
         Population newP;
         vector<Chromosome> topFitnessOld,topFitnessNew;
-        for(int j=0;j<p.getPopulationSize();j++)
-        {
-            topFitnessOld.push_back(p.fittestMember());
-            p.removeChromosomeWithCID(topFitnessOld[j].getCid());
-        }
+        cout<<p.getChromosomeAtIndex(0).getGeneAtIndex(0).getName()<<endl;
         //get topK fittest chromosomes write them in CSV for visualisations
         newP = p.crossOver();
+        cout<<"crossed\n";
         newP.mutation();
         for(int i=0;i<newP.getPopulationSize();i++)
         {
             newP.getChromosomeAtIndex(i).fitnessFunction(reqSkill);
+        }
+        for(int j=0;j<p.getPopulationSize();j++)
+        {
+            //cout<<"in old loop"<<j<<"\n";
+            topFitnessOld.push_back(p.fittestMember());
+            p.removeChromosomeWithCID(topFitnessOld[j].getCid());
         }
         for(int j=0;j<newP.getPopulationSize();j++)
         {
