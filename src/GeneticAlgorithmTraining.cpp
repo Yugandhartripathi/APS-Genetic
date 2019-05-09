@@ -10,7 +10,7 @@ void train(Population p, int generations,bool reqSkill[7], bool reqDomain[6])
         vector<Chromosome> topFitnessOld,topFitnessNew;
         for(int j=0;j<p.getPopulationSize();j++)
         {
-            topFitnessOld.push_back(p.fittestMember);
+            topFitnessOld.push_back(p.fittestMember());
             p.removeChromosomeWithCID(topFitnessOld[j].getCid());
         }
         //get topK fittest chromosomes write them in CSV for visualisations
@@ -22,7 +22,7 @@ void train(Population p, int generations,bool reqSkill[7], bool reqDomain[6])
         }
         for(int j=0;j<newP.getPopulationSize();j++)
         {
-            topFitnessNew.push_back(newP.fittestMember);
+            topFitnessNew.push_back(newP.fittestMember());
             newP.removeChromosomeWithCID(topFitnessNew[j].getCid());
         }
         //sort old and new population wrt fitness values descending - done
