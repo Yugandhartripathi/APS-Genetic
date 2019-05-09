@@ -1,6 +1,4 @@
 #include "dataStorage.hpp"
-#include <fstream>
-#include <sstream>
 
 void createCSV()
 {
@@ -32,6 +30,7 @@ void createCSV()
 
 Gene readRecordAtIndexAndReturnGene(int index)
 {
+    Gene G;
     fstream fin;
     fin.open("processedData.csv", ios::in);
     vector<string> row;
@@ -47,42 +46,27 @@ Gene readRecordAtIndexAndReturnGene(int index)
             row.push_back(word);
         }
         int eidR = stoi(row[0]);
-        for(int i=0;i<21;i++)
-        {
-            cout<<row[i]<<" ";
-        }
-        cout<<endl;
         if (eidR == index)
         {
-
             count = 1;
-            Gene G;
             G.setGid(stoi(row[0]));
             G.setName(row[1]);
             G.setSQ(stoi(row[5]));
             G.setEQ(stoi(row[9]));
             G.setAptitude(stoi(row[13]));
-            G.setExperienceBySkill(0,stoi(row[14])); //C++
-            G.setExperienceBySkill(1,stoi(row[15])); //PHP
-            G.setExperienceBySkill(2,stoi(row[16])); //JS
-            G.setExperienceBySkill(3,stoi(row[17])); //SQL
-            G.setExperienceBySkill(4,stoi(row[18])); //Java
-            G.setExperienceBySkill(5,stoi(row[19])); //Python
-            G.setExperienceBySkill(6,stoi(row[20])); //HTML/CSS
-            for(int indz=21;indz<27;indz++)
-            {
-                bool temp=false;
-                if(stoi(row[indz])==1)
-                {
-                    temp=true;
-                }
-                G.setAreaOfInterest(indz-21,temp);
-            }
+            G.setExperienceBySkill(1,stoi(row[14])); //C++
+            G.setExperienceBySkill(2,stoi(row[15])); //PHP
+            G.setExperienceBySkill(3,stoi(row[16])); //JS
+            G.setExperienceBySkill(4,stoi(row[17])); //SQL
+            G.setExperienceBySkill(5,stoi(row[18])); //Java
+            G.setExperienceBySkill(6,stoi(row[19])); //Python
+            G.setExperienceBySkill(7,stoi(row[20])); //HTML/CSS
             break;
         }
     }
     if (count == 0)
         cout << "Record not found\n";
+    return G;
 }
 
 void read_record()

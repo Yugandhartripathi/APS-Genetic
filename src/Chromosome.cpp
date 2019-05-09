@@ -1,6 +1,4 @@
 #include "dataStorage.hpp"
-#include <vector>
-using namespace std;
 
 Chromosome::Chromosome()
 {
@@ -54,26 +52,15 @@ void Chromosome::setGeneAtIndex(int i, Gene X)
   genes[i] = X;
 }
 
-Gene *Chromosome::getGeneWithID(int id)
-{
-  vector<Gene>::iterator i;
-  for (i = genes.begin(); i != genes.end(); ++i)
-  {
-    if ((*i).getGid() == id)
-      return &(*i);
-  }
-  return NULL;
-}
-
 Gene Chromosome::getGeneAtIndex(int index)
 {
   return genes[index];
 }
 
-void Chromosome::fitnessFunction(bool requiredSkill[7], bool domain[6])
+void Chromosome::fitnessFunction(bool requiredSkill[7])
 {
 
-  int avgSQ = 0, avgEQ = 0, avgAptitude = 0, avgMatchingSkill = 0, avgNonMatchingSkill = 0, relevantInterests = 0, conflictingInterests = 0;
+  int avgSQ = 0, avgEQ = 0, avgAptitude = 0, avgMatchingSkill = 0, avgNonMatchingSkill = 0;
   int match = 0, nonMatch = 0;
   vector<Gene>::iterator i;
   for (i = genes.begin(); i != genes.end(); ++i)
@@ -94,16 +81,7 @@ void Chromosome::fitnessFunction(bool requiredSkill[7], bool domain[6])
         nonMatch++;
       }
     }
-    for (int j = 0; j < 6; j++)
-    {
-      if (domain[j] == true)
-      {
-        if ((*i).checkAreaOfInterest(j) == true)
-          relevantInterests++;
-        else
-          conflictingInterests++;
-      }
-    }
   }
-  fitnessVal = avgSQ / teamSize + avgEQ / teamSize + avgAptitude / teamSize + avgMatchingSkill / match + 0.5 * avgNonMatchingSkill / nonMatch + relevantInterests - 0.5 * conflictingInterests;
+  cout<<avgSQ<<" "<<avgEQ<<endl;
+  fitnessVal = avgSQ / teamSize + avgEQ / teamSize + avgAptitude / teamSize + avgMatchingSkill / match + 0.5 * avgNonMatchingSkill / nonMatch ;
 }

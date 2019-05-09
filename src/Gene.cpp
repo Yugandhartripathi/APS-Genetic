@@ -43,13 +43,24 @@ int Gene::getSQ()
 
 int Gene::getExperienceBySkill(int skillNo)
 {
-  return experience[skillNo];
+  switch(skillNo)
+  {
+    case 1: return e1;
+
+    case 2: return e2;
+        
+    case 3: return e3;
+        
+    case 4: return e4;
+        
+    case 5: return e5;
+        
+    case 6: return e6;
+        
+    case 7: return e7;
+  }
 }
 
-bool Gene::checkAreaOfInterest(int domainNo)
-{
-  return areasOfInterest[domainNo];
-}
 
 void Gene::setGid(int gid)
 {
@@ -78,10 +89,35 @@ void Gene::setSQ(int SQ)
 
 void Gene::setExperienceBySkill(int skillNo, int val)
 {
-  experience[skillNo] = val;
-}
-
-void Gene::setAreaOfInterest(int domainNo, bool val)
-{
-  areasOfInterest[domainNo] = val;
+  switch(skillNo)
+  {
+    case 1: {
+          e1 =val;
+          break;        
+          }            
+    case 2: {
+          e2 =val;
+          break;        
+        }
+    case 3: {
+          e3 =val;
+          break;        
+        }
+    case 4: {
+          e4 =val;
+          break;        
+        }
+    case 5: {
+          e5 =val;
+          break;        
+        }
+    case 6: {
+          e6 =val;
+          break;        
+        }
+    case 7: {
+          e7 =val;
+          break;        
+        }
+  }
 }

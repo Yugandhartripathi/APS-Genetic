@@ -1,7 +1,7 @@
 #include "dataStorage.hpp"
 #include <iostream>
 
-void train(Population p, int generations,bool reqSkill[7], bool reqDomain[6])
+void train(Population p, int generations,bool reqSkill[7])
 {
     p.populate();
     for (int i = 0; i < generations; i++)
@@ -18,7 +18,7 @@ void train(Population p, int generations,bool reqSkill[7], bool reqDomain[6])
         newP.mutation();
         for(int i=0;i<newP.getPopulationSize();i++)
         {
-            newP.getChromosomeAtIndex(i).fitnessFunction(reqSkill,reqDomain);
+            newP.getChromosomeAtIndex(i).fitnessFunction(reqSkill);
         }
         for(int j=0;j<newP.getPopulationSize();j++)
         {
