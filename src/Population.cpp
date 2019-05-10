@@ -1,10 +1,16 @@
 #include "dataStorage.hpp"
 #include <vector>
 #include <stdlib.h>
+#include <cstdlib>
+
 using namespace std;
 
 Population::Population()
 {
+  pid = 0;
+  populationSize = 0;
+  sizeOfEachTeam = 0;
+  numOfEmployees = 0;
 }
 
 Population::Population(int id, int ps, int ts)
@@ -12,6 +18,7 @@ Population::Population(int id, int ps, int ts)
   pid = id;
   populationSize = ps;
   sizeOfEachTeam = ts;
+  numOfEmployees = 60;
 }
 
 int Population::getID()
@@ -85,14 +92,16 @@ void Population::removeChromosomeWithCID(int cid)
 }
 
 void Population::populate()
-{
+{ 
   for (int i = 0; i < populationSize; i++)
   {
     Chromosome newOrder(i, sizeOfEachTeam);
     for (int j = 0; j < sizeOfEachTeam; j++)
     {
       Gene randomGene;
-
+      int r=(rand()%60)+1;
+      randomGene=readRecordAtIndexAndReturnGene(r);
+  
       newOrder.setGeneAtIndex(j, randomGene);
     }
     chromosomes.push_back(newOrder);
@@ -111,7 +120,7 @@ void Population::mutation()
         int r1 = rand() % populationSize;
         int r2 = rand() % sizeOfEachTeam;
         int r3 = rand() % sizeOfEachTeam;
-        chromosomes[i].setGeneAtIndex(r2, chromosomes[r1].getGeneAtIndex[r3]);
+        chromosomes[i].setGeneAtIndex(r2, chromosomes[r1].getGeneAtIndex(r3));
       }
     }
   }
@@ -123,7 +132,8 @@ Population Population::crossOver()
   Population newPopulation(pid + 1, populationSize, sizeOfEachTeam);
   for (int i = 0; i < populationSize; i++)
   {
-    vector<Gene> crossedGenes(sizeOfEachTeam);
+    Gene crossedGenes[sizeOfEachTeam];
+    //cout<<"entered crossove\n";
     int r1 = rand() % sizeOfEachTeam;
     int r2 = rand() % sizeOfEachTeam;
     if (r1 > r2)
@@ -133,10 +143,13 @@ Population Population::crossOver()
       r2 = r1;
       r1 = temp;
     }
+    cout<<r1<<" "<<r2<<endl;
     for (int j = r1; j < r2; j++)
     {
-      crossedGenes[j] = chromosomes[i].getGeneAtIndex(j);
+      //crossedGenes[j] = chromosomes[i].getGeneAtIndex(j);
+      cout<<chromosomes[i].getGeneAtIndex(j).getName()<<endl;
     }
+    //cout<<"copied section\n";
     int r = rand() % populationSize;
     int curr = r2;
     for (int j = r2; j < (sizeOfEachTeam + r2); j++)
@@ -144,22 +157,32 @@ Population Population::crossOver()
       bool found = false;
       int index = j % sizeOfEachTeam;
       for (int k = r1; k < r2; k++)
-      {
+      { //cout<<"inside checker\n";
         if (chromosomes[r].getGeneAtIndex(index).getGid() == crossedGenes[k].getGid())
         {
           found = true;
         }
       }
       if (!found)
-      {
+      { //cout<<"found"<<r1<<r2<<r<<curr<<"\n";
         crossedGenes[curr] = chromosomes[r].getGeneAtIndex(index);
         curr++;
         curr %= sizeOfEachTeam;
+        //cout<<"notfound task done\n";
       }
     }
     Chromosome X(i, sizeOfEachTeam);
-    X.setGenes(crossedGenes);
+    for(int z=0;z<sizeOfEachTeam;z++)
+    {
+      X.setGeneAtIndex(z,crossedGenes[z]);
+    }
+    //X.setGenes(crossedGenes);
     newPopulation.addNewChromosome(X);
   }
   return newPopulation;
+}
+
+Chromosome Population::getChromosomeAtIndex(int ind)
+{
+  return chromosomes[ind];
 }

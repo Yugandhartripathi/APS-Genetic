@@ -1,15 +1,10 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <sstream>
-using namespace std;
+#include "dataStorage.hpp"
 
 void createCSV()
 {
     fstream fout;
     int n;
-    fout.open("testing.csv", ios::out | ios::app);
+    fout.open("processedDataOutput.csv", ios::out | ios::app);
     cout << "Enter number of entries: ";
     cin >> n;
     cout << "Enter the details of" << n << "people:\n roll name C++ Java Python Javascript\n";
@@ -33,12 +28,14 @@ void createCSV()
 //Halted because data needs some preprocessing like one hot encoding of interest/OS/TE columns
 //which will make the process much easier
 
-/*void readRecordAtIndexAndReturnGene(int index)
+Gene readRecordAtIndexAndReturnGene(int index)
 {
+    Gene G;
     fstream fin;
-    fin.open("GAdataFromgForm.csv", ios::in);
+    fin.open("processedData.csv", ios::in);
     vector<string> row;
     string line,word,temp;
+    int count=0;
     while(fin>>temp)
     {
         row.clear();
@@ -48,9 +45,29 @@ void createCSV()
         {
             row.push_back(word);
         }
-
+        int eidR = stoi(row[0]);
+        if (eidR == index)
+        {
+            count = 1;
+            G.setGid(stoi(row[0]));
+            G.setName(row[1]);
+            G.setSQ(stoi(row[5]));
+            G.setEQ(stoi(row[9]));
+            G.setAptitude(stoi(row[13]));
+            G.setExperienceBySkill(1,stoi(row[14])); //C++
+            G.setExperienceBySkill(2,stoi(row[15])); //PHP
+            G.setExperienceBySkill(3,stoi(row[16])); //JS
+            G.setExperienceBySkill(4,stoi(row[17])); //SQL
+            G.setExperienceBySkill(5,stoi(row[18])); //Java
+            G.setExperienceBySkill(6,stoi(row[19])); //Python
+            G.setExperienceBySkill(7,stoi(row[20])); //HTML/CSS
+            break;
+        }
     }
-}*/
+    if (count == 0)
+        cout << "Record not found\n";
+    return G;
+}
 
 void read_record()
 {
@@ -59,8 +76,6 @@ void read_record()
     fin.open("testing.csv", ios::in);
 
     int rollnum, roll2, count = 0;
-    cout << "Enter the roll number "
-         << "of the student to display details: ";
     cin >> rollnum;
 
     vector<string> row;
