@@ -58,7 +58,6 @@ int Gene::getExperienceBySkill(int skillNo)
     case 6: return e6;
         
     case 7: return e7;
-    default: return 0;
   }
 }
 

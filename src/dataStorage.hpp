@@ -18,9 +18,8 @@ void read_record();
 void update_record();
 void delete_record();
 Gene readRecordAtIndexAndReturnGene(int index);
-void train(Population p, int gen,bool rS[]);
-void newTrain(Population p, int gen,bool rS[]);
-
+void train(Population p, int gen, bool rS[]);
+void newTrain(Population p, int gen, bool rS[]);
 
 class Gene
 {

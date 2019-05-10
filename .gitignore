@@ -1,2 +1,3 @@
 *.o
 /.vscode
+/.ipynb_checkpoints
