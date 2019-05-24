@@ -1,6 +1,5 @@
-#include "dataStorage.hpp"
-#include <iostream>
-
+#include "backBone.hpp"
+/*
 void train(Population p, int generations, bool reqSkill[7])
 {
     //p.populate();
@@ -100,3 +99,4 @@ void newTrain(Population p, int generations, bool reqSkill[7])
 
     cout << optimumTeam.getFitnessVal() << endl;
 }
+*/

@@ -5,6 +5,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <cstdlib>
 
 using namespace std;
 
@@ -12,50 +13,44 @@ class Gene;
 class Chromosome;
 class Population;
 
-void printSec();
+extern vector<Gene> Genealogy;
+
 void createCSV();
-void read_record();
-void update_record();
-void delete_record();
-Gene readRecordAtIndexAndReturnGene(int index);
-void train(Population p, int gen, bool rS[]);
-void newTrain(Population p, int gen, bool rS[]);
+void readRecordsAndSaveGene();
+void train(Population p, int gen, int rS[]);
+void newTrain(Population p, int gen, int rS[]);
 
 class Gene
 {
 private:
   int gid;
   string name;
-  //vector<int> experience;       // For a fixed skill mapped to index values
-  int e1;
-  int e2;
-  int e3;
-  int e4;
-  int e5;
-  int e6;
-  int e7;
-  //vector<bool> areasOfInterest; //For a fixed domain mapped to index value
+  vector<int> experience;      // For a fixed skill mapped to index values
+  vector<int> areasOfInterest; //For a fixed domain mapped to index value
   int aptitude;
   int emotionalQuotient;
   int socialQuotient;
 
 public:
   Gene();
-  //Gene(Gene &G);
   int getGid();
-  string getName();
-  int getAptitude();
-  int getEQ();
-  int getSQ();
-  int getExperienceBySkill(int skillNo);
-  //bool checkAreaOfInterest(int domainNo);
   void setGid(int gid);
+  string getName();
   void setName(string name);
+  int getAptitude();
   void setAptitude(int aptitude);
+  int getEQ();
   void setEQ(int EQ);
+  int getSQ();
   void setSQ(int SQ);
+  vector<int> getExperience();
+  vector<int> getInterest();
+  void setExperience(const vector<int> &a);
+  void setInterest(const vector<int> &a);
+  int getExperienceBySkill(int skillNo);
+  int checkAreaOfInterest(int domainNo);
   void setExperienceBySkill(int skillNo, int val);
-  //void setAreaOfInterest(int domainNo, bool val);
+  void setAreaOfInterestByDomain(int domainNo, int val);
 };
 
 class Chromosome
@@ -63,22 +58,23 @@ class Chromosome
 private:
   int cid;
   int teamSize;
-  vector<Gene> genes;
+  vector<int> genes;
   int fitnessVal;
 
 public:
   Chromosome();
   Chromosome(int id, int ts);
   int getCid();
-  int getTeamSize();
-  int getFitnessVal();
   void setCid(int cid);
+  int getTeamSize();
   void setTeamSize(int teamSize);
-  void setGenes(vector<Gene> genes);
+  int getFitnessVal();
   void setFitnessVal(int fitnessVal);
-  void setGeneAtIndex(int i, Gene X);
-  Gene getGeneAtIndex(int index);
-  void fitnessFunction(bool requiredSkills[7]);
+  vector<int> getGenes();
+  void setGenes(const vector<int>& g);
+  void setGeneAtIndex(int i,int geneID);
+  int getGeneAtIndex(int index);
+  //void fitnessFunction(int requiredSkills[7]);
 };
 
 class Population

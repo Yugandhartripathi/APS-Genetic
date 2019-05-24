@@ -2,14 +2,11 @@ CC := g++
 
 all: executable
 
-executable: main.o helperFunctions.o Gene.o Chromosome.o Population.o readWriteCSV.o GA.o
-	$(CC) main.o helperFunctions.o Gene.o Chromosome.o Population.o readWriteCSV.o GA.o -o bin/executable
+executable: main.o Gene.o Chromosome.o Population.o readWriteCSV.o GA.o
+	$(CC) main.o Gene.o Chromosome.o Population.o readWriteCSV.o GA.o -o bin/executable
 	
 main.o: src/main.cpp
 	$(CC) -c src/main.cpp
-
-helperFunctions.o: src/helperFunctions.cpp
-	$(CC) -c src/helperFunctions.cpp
 
 Gene.o: src/Gene.cpp
 	$(CC) -c src/Gene.cpp

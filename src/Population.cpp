@@ -1,16 +1,12 @@
-#include "dataStorage.hpp"
-#include <vector>
-#include <stdlib.h>
-#include <cstdlib>
-
-using namespace std;
+#include "backBone.hpp"
 
 Population::Population()
 {
   pid = 0;
-  populationSize = 0;
-  sizeOfEachTeam = 0;
-  numOfEmployees = 0;
+  populationSize = 100;
+  sizeOfEachTeam = 4;
+  numOfEmployees = 60;
+  chromosomes.resize(populationSize);
 }
 
 Population::Population(int id, int ps, int ts)
@@ -19,6 +15,7 @@ Population::Population(int id, int ps, int ts)
   populationSize = ps;
   sizeOfEachTeam = ts;
   numOfEmployees = 60;
+  chromosomes.resize(populationSize);
 }
 
 int Population::getID()
@@ -50,7 +47,7 @@ void Population::setTeamSize(int ts)
 {
   sizeOfEachTeam = ts;
 }
-
+/*
 Chromosome Population::fittestMember()
 {
   Chromosome fittest;
@@ -185,4 +182,4 @@ Population Population::crossOver()
 Chromosome Population::getChromosomeAtIndex(int ind)
 {
   return chromosomes[ind];
-}
+}*/
