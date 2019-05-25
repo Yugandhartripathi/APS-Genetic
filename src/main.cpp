@@ -2,9 +2,27 @@
 
 int main()
 {
+    srand(time(0));
     readRecordsAndSaveGene();
     cout<<Genealogy.size()<<endl;
-    cout<<Genealogy.at(1).getName()<<endl;
+    int ts=5;
+    Chromosome C(1,ts);
+    for(int i=0;i<ts;i++)
+    {
+        int r=rand()%Genealogy.size();
+        cout<<Genealogy.at(r).getName()<<endl;
+        C.setGeneAtIndex(i,r);
+    }
+    Chromosome C2;
+    C2=C;
+    for(int i=0;i<ts;i++)
+    {
+        cout<<Genealogy.at(C2.getGeneAtIndex(i)).getName()<<" ";
+    }
+    vector<int> rS={1,0,1,0,1,0,0};
+    C2.fitnessFunction(rS);
+    cout<<"\n"<<C2.getFitnessVal();
+    cout<<endl;
     //Main Workflow
     //int teamSize, populationSize, gen;
     //bool rS[]={true,true,true,true,true,true,true};

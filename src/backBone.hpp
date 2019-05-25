@@ -74,7 +74,7 @@ public:
   void setGenes(const vector<int>& g);
   void setGeneAtIndex(int i,int geneID);
   int getGeneAtIndex(int index);
-  //void fitnessFunction(int requiredSkills[7]);
+  void fitnessFunction(const vector<int>& requiredSkills);
 };
 
 class Population
