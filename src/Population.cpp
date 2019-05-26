@@ -5,7 +5,7 @@ Population::Population()
   pid = 0;
   populationSize = 100;
   sizeOfEachTeam = 4;
-  numOfEmployees = 60;
+  numOfEmployees = Genealogy.size();
   chromosomes.resize(populationSize);
 }
 
@@ -14,7 +14,7 @@ Population::Population(int id, int ps, int ts)
   pid = id;
   populationSize = ps;
   sizeOfEachTeam = ts;
-  numOfEmployees = 60;
+  numOfEmployees = Genealogy.size();
   chromosomes.resize(populationSize);
 }
 
@@ -47,7 +47,7 @@ void Population::setTeamSize(int ts)
 {
   sizeOfEachTeam = ts;
 }
-/*
+
 Chromosome Population::fittestMember()
 {
   Chromosome fittest;
@@ -64,47 +64,22 @@ Chromosome Population::fittestMember()
   return fittest;
 }
 
-void Population::addNewChromosome(Chromosome X)
-{
-  chromosomes.push_back(X);
-}
-
-void Population::removeChromosomeWithCID(int cid)
-{
-  Chromosome toBeDeleted;
-  vector<Chromosome>::iterator i;
-  vector<Chromosome>::iterator pos;
-  pos = chromosomes.end();
-  for (i = chromosomes.begin(); i != chromosomes.end(); ++i)
-  {
-    if ((*i).getCid() == cid)
-    {
-      toBeDeleted = (*i);
-      pos = i;
-      break;
-    }
-  }
-  if (pos != chromosomes.end())
-    chromosomes.erase(pos);
-}
-
 void Population::populate()
 { 
+  srand(time(0));
+  vector<int> r;
   for (int i = 0; i < populationSize; i++)
   {
+    r.clear();
     Chromosome newOrder(i, sizeOfEachTeam);
     for (int j = 0; j < sizeOfEachTeam; j++)
     {
-      Gene randomGene;
-      int r=(rand()%60)+1;
-      randomGene=readRecordAtIndexAndReturnGene(r);
-  
-      newOrder.setGeneAtIndex(j, randomGene);
+      r.push_back(rand()%(Genealogy.size()));
     }
-    chromosomes.push_back(newOrder);
+    newOrder.setGenes(r);
+    chromosomes.at(i)=newOrder;
   }
 }
-
 void Population::mutation()
 {
   for (int i = 0; i < populationSize; i++)
@@ -129,8 +104,9 @@ Population Population::crossOver()
   Population newPopulation(pid + 1, populationSize, sizeOfEachTeam);
   for (int i = 0; i < populationSize; i++)
   {
-    Gene crossedGenes[sizeOfEachTeam];
-    //cout<<"entered crossove\n";
+    vector<int> crossedGenes;
+    crossedGenes.resize(sizeOfEachTeam);
+    //cout<<"entered crossover\n";
     int r1 = rand() % sizeOfEachTeam;
     int r2 = rand() % sizeOfEachTeam;
     if (r1 > r2)
@@ -140,22 +116,22 @@ Population Population::crossOver()
       r2 = r1;
       r1 = temp;
     }
-    cout<<r1<<" "<<r2<<endl;
+    //cout<<r1<<" "<<r2<<endl;
     for (int j = r1; j < r2; j++)
     {
-      //crossedGenes[j] = chromosomes[i].getGeneAtIndex(j);
-      cout<<chromosomes[i].getGeneAtIndex(j).getName()<<endl;
+      crossedGenes[j] = chromosomes[i].getGeneAtIndex(j);
+      //cout<<Genealogy.at(chromosomes.at(i).getGeneAtIndex(j)).getName()<<endl;
     }
-    //cout<<"copied section\n";
+    //cout<<"copied section complete\n";
     int r = rand() % populationSize;
     int curr = r2;
-    for (int j = r2; j < (sizeOfEachTeam + r2); j++)
+    for (int j = r2; j < (sizeOfEachTeam + r2); j++)   //we can do better complexity wise here
     {
       bool found = false;
       int index = j % sizeOfEachTeam;
       for (int k = r1; k < r2; k++)
       { //cout<<"inside checker\n";
-        if (chromosomes[r].getGeneAtIndex(index).getGid() == crossedGenes[k].getGid())
+        if (chromosomes[r].getGeneAtIndex(index) == crossedGenes[k])
         {
           found = true;
         }
@@ -169,17 +145,32 @@ Population Population::crossOver()
       }
     }
     Chromosome X(i, sizeOfEachTeam);
-    for(int z=0;z<sizeOfEachTeam;z++)
+    /*for(int z=0;z<sizeOfEachTeam;z++)
     {
       X.setGeneAtIndex(z,crossedGenes[z]);
-    }
-    //X.setGenes(crossedGenes);
-    newPopulation.addNewChromosome(X);
+    }*/
+    X.setGenes(crossedGenes);
+    newPopulation.setChromosomeAtIndex(i,X);
   }
   return newPopulation;
 }
 
+vector<Chromosome> Population::getChromosomes()
+{
+  return chromosomes;
+}
+
+void Population::setChromosomes(const vector<Chromosome>& a)
+{
+  chromosomes=a;
+}
+
 Chromosome Population::getChromosomeAtIndex(int ind)
 {
-  return chromosomes[ind];
-}*/
+  return chromosomes.at(ind);
+}
+
+void Population::setChromosomeAtIndex(int index, Chromosome a)
+{
+  chromosomes.at(index)=a;
+}

@@ -95,11 +95,12 @@ public:
   void setPopulationSize(int ps);
   int getTeamSize();
   void setTeamSize(int ts);
-  void populate();
+  vector<Chromosome> getChromosomes();
+  void setChromosomes(const vector<Chromosome>& a);
+  Chromosome getChromosomeAtIndex(int ind);
+  void setChromosomeAtIndex(int index, Chromosome c);
   Chromosome fittestMember();
-  void addNewChromosome(Chromosome X);
-  void removeChromosomeWithCID(int cid);
+  void populate();
   Population crossOver();
   void mutation();
-  Chromosome getChromosomeAtIndex(int ind);
 };

@@ -1,12 +1,19 @@
 #include "backBone.hpp"
-/*
-void train(Population p, int generations, bool reqSkill[7])
+
+void train(Population p, int generations, int reqSkill[7])
 {
-    //p.populate();
-    cout << "populated\n";
+    p.populate();
+    for(int i=0;i<p.getPopulationSize();i++)
+    {
+        cout<<"Chromosome : "<<i<<" ";
+        for(int j=0;j<p.getTeamSize();j++)
+        {
+            cout<<p.getChromosomeAtIndex(i).getGeneAtIndex(j)<<" "<<Genealogy.at(p.getChromosomeAtIndex(i).getGeneAtIndex(j)).getName()<<" ";
+        }
+        cout<<endl;
+    }
     for (int i = 0; i < generations; i++)
     {
-        cout << "in gen loop\n";
         Population newP;
         vector<Chromosome> topFitnessOld, topFitnessNew;
         //cout<<p.getChromosomeAtIndex(0).getGeneAtIndex(0).getName()<<endl;
@@ -14,6 +21,7 @@ void train(Population p, int generations, bool reqSkill[7])
         newP = p.crossOver();
         cout<<"crossed\n";
         newP.mutation();
+        /*
         for (int i = 0; i < newP.getPopulationSize(); i++)
         {
             newP.getChromosomeAtIndex(i).fitnessFunction(reqSkill);
@@ -48,8 +56,10 @@ void train(Population p, int generations, bool reqSkill[7])
         }
         p = newP;
         // Here we go again
+        */
     }
 }
+/*
 void newTrain(Population p, int generations, bool reqSkill[7])
 {
     Gene randomGene;
