@@ -1,56 +1,92 @@
-#include "dataStorage.hpp"
-#include <iostream>
+#include "backBone.hpp"
 
-void train(Population p, int generations, bool reqSkill[7])
+void train(Population p, int generations, const vector<int>& reqSkill,const vector<int>& domains)
 {
-    //p.populate();
-    cout << "populated\n";
-    for (int i = 0; i < generations; i++)
+    p.populate();
+    p.calculateFitness(reqSkill,domains);
+    /*for(int i=0;i<p.getPopulationSize();i++)
     {
-        cout << "in gen loop\n";
+        cout<<"Chromosome : "<<i<<" ";
+        for(int j=0;j<p.getTeamSize();j++)
+        {
+            cout<<p.getChromosomeAtIndex(i).getGeneAtIndex(j)<<" "<<Genealogy.at(p.getChromosomeAtIndex(i).getGeneAtIndex(j)).getName()<<" ";
+        }
+        cout<<endl;
+    }*/
+    for (int i = 0; i < generations; i++)
+    {   //cout<<"Generation Number :"<<i+1;
         Population newP;
         vector<Chromosome> topFitnessOld, topFitnessNew;
         //cout<<p.getChromosomeAtIndex(0).getGeneAtIndex(0).getName()<<endl;
         //get topK fittest chromosomes write them in CSV for visualisations
         newP = p.crossOver();
-        cout<<"crossed\n";
-        newP.mutation();
-        for (int i = 0; i < newP.getPopulationSize(); i++)
+       // cout<<"crossed\n";
+        newP.randomResettingMutation();
+        //cout<<"mutated"<<endl;
+        /*
+        for(int k=0;k<newP.getPopulationSize();k++)
         {
-            newP.getChromosomeAtIndex(i).fitnessFunction(reqSkill);
+            cout<<"Chromosome : "<<k<<" ";
+            for(int j=0;j<newP.getTeamSize();j++)
+            {
+                cout<<newP.getChromosomeAtIndex(k).getGeneAtIndex(j)<<" "<<Genealogy.at(newP.getChromosomeAtIndex(k).getGeneAtIndex(j)).getName()<<" ";
+            }
+            cout<<" "<<newP.getChromosomeAtIndex(k).getFitnessVal();
+            cout<<endl;
         }
+        */
+        /*
+        for (int j = 0; j < newP.getPopulationSize(); j++)
+        {
+            newP.getChromosomeAtIndex(j).fitnessFunction(reqSkill,domains);
+            cout<<"\n"<<newP.getChromosomeAtIndex(j).getFitnessVal();
+        }
+        */
+        newP.calculateFitness(reqSkill,domains);
         for (int j = 0; j < p.getPopulationSize(); j++)
         {
             //cout<<"in old loop"<<j<<"\n";
             topFitnessOld.push_back(p.fittestMember());
-            p.removeChromosomeWithCID(topFitnessOld[j].getCid());
+            p.updateFitnessVal(topFitnessOld[j].getCid(),0);
+            //p.removeChromosomeWithCID(topFitnessOld[j].getCid());
         }
+        //cout<<endl;
         for (int j = 0; j < newP.getPopulationSize(); j++)
         {
             topFitnessNew.push_back(newP.fittestMember());
-            newP.removeChromosomeWithCID(topFitnessNew[j].getCid());
+            newP.updateFitnessVal(topFitnessNew[j].getCid(),0);
+            //newP.removeChromosomeWithCID(topFitnessNew[j].getCid());
         }
+        //cout<<"top new and old sorted done"<<endl;
+        //cout<<topFitnessNew[0].getFitnessVal();
         //sort old and new population wrt fitness values descending - done
         //take top 20% of old population
         int ranged = (int)(0.2 * p.getPopulationSize());
         for (int j = 0; j < ranged; j++)
         {
-            newP.addNewChromosome(topFitnessOld[j]);
+            newP.setChromosomeAtIndex(j,topFitnessOld[j]);
+            //newP.addNewChromosome(topFitnessOld[j]);
         }
         //80% of new
         for (int j = ranged; j < p.getPopulationSize(); j++)
         {
-            newP.addNewChromosome(topFitnessNew[j - ranged]);
+            newP.setChromosomeAtIndex(j,topFitnessNew[j - ranged]);
+            //newP.addNewChromosome(topFitnessNew[j - ranged]);
         }
         Chromosome topFitness;
         if (topFitnessOld[0].getFitnessVal() < topFitnessNew[0].getFitnessVal())
-        {
-            topFitness = newP.fittestMember();
-        }
+            topFitness = topFitnessNew[0];
+        else
+            topFitness = topFitnessOld[0];
+
         p = newP;
+        if(i == generations -1)
+        cout<<" "<<topFitness.getFitnessVal()<<" - "<<newP.getChromosomeAtIndex(newP.getPopulationSize() -1).getFitnessVal()<<endl;
         // Here we go again
     }
 }
+
+/*
 void newTrain(Population p, int generations, bool reqSkill[7])
 {
     Gene randomGene;
@@ -100,3 +136,4 @@ void newTrain(Population p, int generations, bool reqSkill[7])
 
     cout << optimumTeam.getFitnessVal() << endl;
 }
+*/

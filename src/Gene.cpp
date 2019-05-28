@@ -1,20 +1,10 @@
-#include "dataStorage.hpp"
-#include <vector>
-using namespace std;
+#include "backBone.hpp"
 
 Gene::Gene()
 {
+  experience.resize(7);
+  areasOfInterest.resize(6);
 }
-
-/*Gene::Gene(Gene &G)
-{
-  gid = G.gid;
-  name = G.name;
-  copy((G.experience).begin(), (G.experience).end(), back_inserter(experience)); 
-  aptitude = G.aptitude;;
-  emotionalQuotient = G.emotionalQuotient;
-  socialQuotient = G.socialQuotient;
-}*/
 
 int Gene::getGid()
 {
@@ -43,81 +33,65 @@ int Gene::getSQ()
 
 int Gene::getExperienceBySkill(int skillNo)
 {
-  switch(skillNo)
-  {
-    case 1: return e1;
-
-    case 2: return e2;
-        
-    case 3: return e3;
-        
-    case 4: return e4;
-        
-    case 5: return e5;
-        
-    case 6: return e6;
-        
-    case 7: return e7;
-  }
+  return experience.at(skillNo);
 }
 
-
-void Gene::setGid(int gid)
+int Gene::checkAreaOfInterest(int domainNo)
 {
-  this->gid = gid;
+  return areasOfInterest.at(domainNo);
 }
 
-void Gene::setName(string name)
+void Gene::setGid(int id)
 {
-  this->name = name;
+  gid = id;
 }
 
-void Gene::setAptitude(int aptitude)
+void Gene::setName(string n)
 {
-  this->aptitude = aptitude;
+  name = n;
+}
+
+void Gene::setAptitude(int apt)
+{
+  aptitude = apt;
 }
 
 void Gene::setEQ(int EQ)
 {
-  this->emotionalQuotient = EQ;
+  emotionalQuotient = EQ;
 }
 
 void Gene::setSQ(int SQ)
 {
-  this->socialQuotient = SQ;
+  socialQuotient = SQ;
 }
 
 void Gene::setExperienceBySkill(int skillNo, int val)
 {
-  switch(skillNo)
-  {
-    case 1: {
-          e1 =val;
-          break;        
-          }            
-    case 2: {
-          e2 =val;
-          break;        
-        }
-    case 3: {
-          e3 =val;
-          break;        
-        }
-    case 4: {
-          e4 =val;
-          break;        
-        }
-    case 5: {
-          e5 =val;
-          break;        
-        }
-    case 6: {
-          e6 =val;
-          break;        
-        }
-    case 7: {
-          e7 =val;
-          break;        
-        }
-  }
+  experience.at(skillNo)=val;
+}
+
+void Gene::setAreaOfInterestByDomain(int domainNo, int val)
+{
+  areasOfInterest.at(domainNo)=val;
+}
+
+vector<int> Gene::getExperience()
+{
+  return experience;
+}
+
+vector<int> Gene::getInterest()
+{
+  return areasOfInterest;
+}
+
+void Gene::setExperience(const vector<int>& a)
+{
+  experience=a;
+}
+
+void Gene::setInterest(const vector<int>& a)
+{
+  areasOfInterest=a;
 }
